@@ -1,0 +1,87 @@
+{
+    "battle_royale": {
+        "current": {
+            "start": 1761606000,
+            "end": 1761611400,
+            "readableDate_start": "2025-10-27 23:00:00",
+            "readableDate_end": "2025-10-28 00:30:00",
+            "map": "Kings Canyon",
+            "code": "kings_canyon_rotation",
+            "DurationInSecs": 5400,
+            "DurationInMinutes": 90,
+            "asset": "https:\/\/apexlegendsstatus.com\/assets\/maps\/Kings_Canyon.png",
+            "remainingSecs": 1812,
+            "remainingMins": 30,
+            "remainingTimer": "00:30:12"
+        },
+        "next": {
+            "start": 1761611400,
+            "end": 1761616800,
+            "readableDate_start": "2025-10-28 00:30:00",
+            "readableDate_end": "2025-10-28 02:00:00",
+            "map": "Olympus",
+            "code": "olympus_rotation",
+            "DurationInSecs": 5400,
+            "DurationInMinutes": 90,
+            "asset": "https:\/\/apexlegendsstatus.com\/assets\/maps\/Olympus.png"
+        }
+    },
+    "ranked": {
+        "current": {
+            "start": 1761584400,
+            "end": 1761670800,
+            "readableDate_start": "2025-10-27 17:00:00",
+            "readableDate_end": "2025-10-28 17:00:00",
+            "map": "Kings Canyon",
+            "code": "kings_canyon_rotation",
+            "DurationInSecs": 86400,
+            "DurationInMinutes": 1440,
+            "asset": "https:\/\/apexlegendsstatus.com\/assets\/maps\/Kings_Canyon.png",
+            "remainingSecs": 61212,
+            "remainingMins": 1020,
+            "remainingTimer": "17:00:12"
+        },
+        "next": {
+            "start": 1761670800,
+            "end": 1761757200,
+            "readableDate_start": "2025-10-28 17:00:00",
+            "readableDate_end": "2025-10-29 17:00:00",
+            "map": "Olympus",
+            "code": "olympus_rotation",
+            "DurationInSecs": 86400,
+            "DurationInMinutes": 1440,
+            "asset": "https:\/\/apexlegendsstatus.com\/assets\/maps\/Olympus.png"
+        }
+    },
+    "ltm": {
+        "current": {
+            "start": 1761608700,
+            "end": 1761609600,
+            "readableDate_start": "2025-10-27 23:45:00",
+            "readableDate_end": "2025-10-28 00:00:00",
+            "map": "Skulltown",
+            "code": "freedm_tdm_skulltown",
+            "DurationInSecs": 900,
+            "DurationInMinutes": 15,
+            "isActive": true,
+            "eventName": "TDM",
+            "asset": "https:\/\/apexlegendsstatus.com\/assets\/maps\/Arena_Skulltown.png",
+            "remainingSecs": 12,
+            "remainingMins": 0,
+            "remainingTimer": "00:00:12"
+        },
+        "next": {
+            "start": 1761609600,
+            "end": 1761610500,
+            "readableDate_start": "2025-10-28 00:00:00",
+            "readableDate_end": "2025-10-28 00:15:00",
+            "map": "Caustic Treatment",
+            "code": "control_canyonlands_caustic",
+            "DurationInSecs": 900,
+            "DurationInMinutes": 15,
+            "isActive": true,
+            "eventName": "Control",
+            "asset": "https:\/\/apexlegendsstatus.com\/assets\/maps\/Kings_Canyon.png"
+        }
+    }
+}
