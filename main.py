@@ -65,6 +65,7 @@ async def update_map_status():
             # await ltm_channel.edit(name=new_ltm_name)
             # print(f"Updated channel name to: {new_ltm_name}")
 
+            await client.close()    
         except Exception as e:
             print("Error updating map:", e)
 
