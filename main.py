@@ -34,7 +34,7 @@ async def update_map_status():
         # print(f"LTM Channel ID: {LTM_VOICE_CHANNEL_ID}, Found: {ltm_channel is not None}")
         return
 
-    while not client.is_closed():
+    if not client.is_closed():
         try:
             request_url = f"https://api.mozambiquehe.re/maprotation?auth={APEX_API_KEY}&version=2"
             print(f"Fetching data from: {request_url}")
@@ -68,7 +68,9 @@ async def update_map_status():
         except Exception as e:
             print("Error updating map:", e)
 
-        await asyncio.sleep(UPDATE_INTERVAL)
+        # await asyncio.sleep(UPDATE_INTERVAL)
+    else:
+        print("Client is closed, cannot update map status.")
 
 @client.event
 async def on_ready():
