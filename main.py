@@ -9,10 +9,11 @@ load_dotenv()
 TOKEN = os.getenv('DISCORD_BOT_TOKEN')
 RANK_VOICE_CHANNEL_ID = int(os.getenv('RANK_VOICE_CHANNEL_ID'))
 PUBS_VOICE_CHANNEL_ID = int(os.getenv('PUBS_VOICE_CHANNEL_ID'))
+# LTM_VOICE_CHANNEL_ID = int(os.getenv('LTM_VOICE_CHANNEL_ID'))
 APEX_API_KEY = os.getenv('APEX_API_KEY')
 
 SECONDS_IN_MINUTE = 60
-UPDATE_INTERVAL = 15 * SECONDS_IN_MINUTE  # every 15 minutes
+UPDATE_INTERVAL = 60 * SECONDS_IN_MINUTE  # every 60 minutes
 
 
 
@@ -23,12 +24,14 @@ async def update_map_status():
     await client.wait_until_ready()
     ranked_channel = client.get_channel(RANK_VOICE_CHANNEL_ID)
     pubs_channel = client.get_channel(PUBS_VOICE_CHANNEL_ID)
+    ltm_channel = True # client.get_channel(LTM_VOICE_CHANNEL_ID)
 
-    if not ranked_channel or not pubs_channel:
+    if not ranked_channel or not pubs_channel or not ltm_channel:
         print("One or more channels not found.")
 
         print(f"Ranked Channel ID: {RANK_VOICE_CHANNEL_ID}, Found: {ranked_channel is not None}")
         print(f"Pubs Channel ID: {PUBS_VOICE_CHANNEL_ID}, Found: {pubs_channel is not None}")
+        # print(f"LTM Channel ID: {LTM_VOICE_CHANNEL_ID}, Found: {ltm_channel is not None}")
         return
 
     while not client.is_closed():
@@ -45,6 +48,11 @@ async def update_map_status():
             br_map_name = battle_royale["map"]
             br_timer = battle_royale["remainingTimer"]
 
+            ltm = data["ltm"]["current"]
+            ltm_map_name = ltm["map"]
+            ltm_event_name = ltm["eventName"]
+            ltm_next_event_name = data["ltm"]["next"]["eventName"]
+
             new_ranked_name = f"🏆 Ranked: {ranked_map_name} ({ranked_timer})"
             await ranked_channel.edit(name=new_ranked_name)
             print(f"Updated channel name to: {new_ranked_name}")
@@ -52,6 +60,10 @@ async def update_map_status():
             new_battle_royale_name = f"🐔 PUBS: {br_map_name} ({br_timer})"
             await pubs_channel.edit(name=new_battle_royale_name)
             print(f"Updated channel name to: {new_battle_royale_name}")
+
+            # new_ltm_name = f"🎉 LTM: {ltm_map_name} ({ltm_event_name} → {ltm_next_event_name})"
+            # await ltm_channel.edit(name=new_ltm_name)
+            # print(f"Updated channel name to: {new_ltm_name}")
 
         except Exception as e:
             print("Error updating map:", e)
