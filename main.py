@@ -9,7 +9,7 @@ load_dotenv()
 TOKEN = os.getenv('DISCORD_BOT_TOKEN')
 RANK_VOICE_CHANNEL_ID = int(os.getenv('RANK_VOICE_CHANNEL_ID'))
 PUBS_VOICE_CHANNEL_ID = int(os.getenv('PUBS_VOICE_CHANNEL_ID'))
-# LTM_VOICE_CHANNEL_ID = int(os.getenv('LTM_VOICE_CHANNEL_ID'))
+MIXTAPE_VOICE_CHANNEL_ID = int(os.getenv('MIXTAPE_VOICE_CHANNEL_ID'))
 APEX_API_KEY = os.getenv('APEX_API_KEY')
 
 SECONDS_IN_MINUTE = 60
@@ -24,14 +24,14 @@ async def update_map_status():
     await client.wait_until_ready()
     ranked_channel = client.get_channel(RANK_VOICE_CHANNEL_ID)
     pubs_channel = client.get_channel(PUBS_VOICE_CHANNEL_ID)
-    ltm_channel = True # client.get_channel(LTM_VOICE_CHANNEL_ID)
+    mixtape_channel = client.get_channel(MIXTAPE_VOICE_CHANNEL_ID)
 
-    if not ranked_channel or not pubs_channel or not ltm_channel:
+    if not ranked_channel or not pubs_channel or not mixtape_channel:
         print("One or more channels not found.")
 
         print(f"Ranked Channel ID: {RANK_VOICE_CHANNEL_ID}, Found: {ranked_channel is not None}")
         print(f"Pubs Channel ID: {PUBS_VOICE_CHANNEL_ID}, Found: {pubs_channel is not None}")
-        # print(f"LTM Channel ID: {LTM_VOICE_CHANNEL_ID}, Found: {ltm_channel is not None}")
+        print(f"Mixtape Channel ID: {MIXTAPE_VOICE_CHANNEL_ID}, Found: {mixtape_channel is not None}")
         return
 
     if not client.is_closed():
@@ -48,10 +48,11 @@ async def update_map_status():
             br_map_name = battle_royale["map"]
             br_timer = battle_royale["remainingTimer"]
 
-            ltm = data["ltm"]["current"]
-            ltm_map_name = ltm["map"]
-            ltm_event_name = ltm["eventName"]
-            ltm_next_event_name = data["ltm"]["next"]["eventName"]
+            mixtape = data["ltm"]["current"]
+            mixtape_next = data["ltm"]["next"]
+            mixtape_map_name = mixtape["map"]
+            mixtape_event_name = mixtape["eventName"]
+            mixtape_next_event_name = mixtape_next["eventName"]
 
             new_ranked_name = f"🏆 Ranked: {ranked_map_name} ({ranked_timer})"
             await ranked_channel.edit(name=new_ranked_name)
@@ -61,9 +62,9 @@ async def update_map_status():
             await pubs_channel.edit(name=new_battle_royale_name)
             print(f"Updated channel name to: {new_battle_royale_name}")
 
-            # new_ltm_name = f"🎉 LTM: {ltm_map_name} ({ltm_event_name} → {ltm_next_event_name})"
-            # await ltm_channel.edit(name=new_ltm_name)
-            # print(f"Updated channel name to: {new_ltm_name}")
+            new_mixtape_name = f"🎉 Mixtape: {mixtape_map_name} ({mixtape_event_name} → {mixtape_next_event_name})"
+            await mixtape_channel.edit(name=new_mixtape_name)
+            print(f"Updated channel name to: {new_mixtape_name}")
 
             await client.close()    
         except Exception as e:
