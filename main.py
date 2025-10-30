@@ -66,9 +66,13 @@ async def update_map_status():
             await mixtape_channel.edit(name=new_mixtape_name)
             print(f"Updated channel name to: {new_mixtape_name}")
 
-            await client.close()    
+# stop event loop so it only runs once for testing
+            await client.close()
+            
         except Exception as e:
             print("Error updating map:", e)
+            await client.close()
+            client.loop.stop()
 
         # await asyncio.sleep(UPDATE_INTERVAL)
     else:
